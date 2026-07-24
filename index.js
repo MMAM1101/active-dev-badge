@@ -28,14 +28,11 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 
     client.once('ready', async () => {
       console.log(`Logged in as ${client.user.tag}`);
+            client.user.setActivity('chill with manish', { type: 3 }); // Type 3 is "Watching"
       
-      // Set bot's status
-      client.user.setActivity('chill with manish', { type: 3 }); // Type 3 is "Watching"
-      
-      // Set bot's about me with watermark
+
       const watermark = "Made with ❤️ by Manish | Active Developer Badge Bot | Get your badge in 24 hours!";
       
-      // Function to ensure watermark stays
       const ensureWatermark = async () => {
         try {
           await client.application.edit({
@@ -46,7 +43,6 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
         }
       };
 
-      // Set initial watermark
       await ensureWatermark();
       
       // Check and reset watermark every 5 minutes
@@ -62,7 +58,7 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
       const userId = interaction.user.id;
       let userTimers = {};
       
-      // Read existing timers
+      
       try {
         userTimers = JSON.parse(fs.readFileSync('./userTimers.json'));
       } catch (error) {
